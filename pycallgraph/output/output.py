@@ -90,6 +90,9 @@ class Output(object):
         raise NotImplementedError('done')
 
     def ensure_binary(self, cmd):
+        if os.path.isfile(cmd) and os.access(cmd, os.X_OK):
+            return
+
         if find_executable(cmd):
             return
 
